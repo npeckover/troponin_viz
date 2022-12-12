@@ -31,7 +31,7 @@ troponin <- troponin %>%
          D_hsTNT = F_hsTnT - B_hsTNT) # difference in trop levels
 
 #### create plots
-library(cowplot)
+library(gridExtra)
 library(wesanderson)
 library(showtext)
 showtext_auto()
@@ -115,5 +115,5 @@ plot_ACM <- troponin %>%
        subtitle = "Baseline vs. Follow-Up levels (log scale)",
        y = "Follow-Up hs-cTnT", x = "Baseline hs-cTnT")
 
-# cowplot all plots together
-plot_grid(plot_age, plot_ACM, plot_bp, plot_age_MAP)
+# arrange all plots together
+grid.arrange(plot_age, plot_ACM, plot_bp, plot_age_MAP, ncol = 2)
