@@ -1,4 +1,3 @@
-setwd("D:/Documents/Work/Independent/Troponin")
 library(readr)
 library(tidyverse)
 
@@ -71,7 +70,7 @@ theme_np_dark <- function() {
     )
 }
 
-#####
+# build plots
 plot_age <- troponin %>%
   ggplot(mapping = aes(Age)) + 
   geom_bar(aes(y = ..prop.., group = 1),
@@ -116,4 +115,5 @@ plot_ACM <- troponin %>%
        subtitle = "Baseline vs. Follow-Up levels (log scale)",
        y = "Follow-Up hs-cTnT", x = "Baseline hs-cTnT")
 
+# cowplot all plots together
 plot_grid(plot_age, plot_ACM, plot_bp, plot_age_MAP)
