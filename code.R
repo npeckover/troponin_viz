@@ -36,9 +36,10 @@ library(wesanderson)
 library(showtext)
 showtext_auto()
 
+# save some pretty colors
 pal <- wes_palette("GrandBudapest2", 14, type = "continuous")
-# define custom theme
 
+# define custom theme
 theme_np_dark <- function() {
   theme(
     line = element_line(color = "#939393"),
@@ -46,6 +47,8 @@ theme_np_dark <- function() {
                         linetype = 0, colour = NA),
     text = element_text(color = "#dbdbdb", family = "Lato"),
     axis.title = element_text(color = "#dbdbdb", size = rel(1)),
+    axis.title.x = element_text(vjust = -2),
+    axis.title.y = element_text(vjust = 4),
     axis.ticks = element_blank(),
     axis.line = element_blank(),
     axis.text.x = element_text(color = "#dbdbdb", size = rel(1.1)),
@@ -64,9 +67,8 @@ theme_np_dark <- function() {
     panel.grid.minor.x = element_blank(),
     plot.title = element_text(hjust = 0.5, size = rel(1.6)),
     plot.subtitle = element_text(hjust = 0.5, size = rel(0.8)),
-    plot.caption = element_text(hjust = 1, size = rel(0.5)),
+    plot.caption = element_text(hjust = 1, size = rel(0.85)),
     plot.margin = unit(c(1, 1, 1, 1), "lines")
-    #strip.background = element_rect(fill = '#212121', color = '#212121')
     )
 }
 
@@ -98,8 +100,9 @@ plot_age_MAP <- troponin %>%
   theme_np_dark() +
   labs(title = "Mean Arterial Blood Pressure",
        subtitle = "Sorted by age group",
-       caption = "Data courtesy Xiao, Wenkai, et. al. (2017) doi.org/10.5061/dryad.bq0rm",
-       y = "MAP", x = "Age Group")
+       caption = caption = "All plots by Nick Peckover
+       Data courtesy Xiao, Wenkai, et. al. (2017) doi.org/10.5061/dryad.bq0rm",
+       y = "MAP", x = "")
 
 plot_ACM <- troponin %>%
   ggplot(mapping = aes(x = log(B_hsTNT), y = log(F_hsTnT),
@@ -110,7 +113,8 @@ plot_ACM <- troponin %>%
   #scale_color_manual(values = pal[c(14,9)]) +
   theme_np_dark() +
   theme(panel.grid.major.y = element_blank(),
-        panel.grid.minor.y = element_blank()) +
+        panel.grid.minor.y = element_blank(),
+       legend.position = c(0.5, 0.98)) +
   labs(title = "High Sensitivity Troponin",
        subtitle = "Baseline vs. Follow-Up levels (log scale)",
        y = "Follow-Up hs-cTnT", x = "Baseline hs-cTnT")
